@@ -1,44 +1,29 @@
 const express = require("express");
+const socket = require("socket.io");
+const cors = require("cors");
+
 const app = express();
-const port = 3001;
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+  })
+);
 
-const items = {
-  data: [
-    {
-      description: "Fast foods, potatoes, hash browns, rnd pieces or patty",
-      kcal: 272,
-      protein_g: 2.58,
-      carbohydrate_g: 28.88,
-      sugar_g: 0.56,
-    },
-    {
-      description: "Chick-fil-a, hash browns",
-      kcal: 301,
-      protein_g: 3,
-      carbohydrate_g: 30.51,
-      sugar_g: 0.54,
-    },
-    {
-      description: "Denny's, hash browns",
-      kcal: 197,
-      protein_g: 2.49,
-      carbohydrate_g: 26.59,
-      sugar_g: 1.38,
-    },
-    {
-      description: "Restaurant, family style, hash browns",
-      kcal: 197,
-      protein_g: 2.49,
-      carbohydrate_g: 26.59,
-      sugar_g: 1.38,
-    },
-  ],
-};
+const server = app.listen(process.env.SERVER_PORT, () => {
+  console.log(`Example app listening at http://localhost:${process.env.SERVER_PORT}`);
+});
 
-app.get("/api/items", (req, res) => {
+app.post("/api/sessions", (req, res) => {
   res.json(items);
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+const io = socket(server, {
+  cors: {
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", () => {
+  console.log("Made socket connection");
 });
