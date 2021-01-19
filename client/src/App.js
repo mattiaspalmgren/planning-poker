@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { io } from 'socket.io-client';
+
 import "./App.css";
 
-const API_URL = "/api/items";
+const HOST_URL = process.env.REACT_APP_SERVER_URL;
+const API_URL = `${HOST_URL}/api/items`;
 
 function App() {
   const [data, setData] = useState({ items: [] });
+  const [, setSocket] = useState();
 
   useEffect(() => {
     async function fetchFromApi() {
@@ -13,6 +17,8 @@ function App() {
       setData({ items: data.data });
     }
 
+    const ioSocket = io(HOST_URL);
+    setSocket(ioSocket);
     fetchFromApi();
   }, []);
 
