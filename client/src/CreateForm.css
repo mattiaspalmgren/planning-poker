@@ -1,0 +1,40 @@
+.CreateForm-wrapper {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.CreateForm-item {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.CreateForm-label {
+    font-size: medium;
+    font-weight: bold;
+    text-align: left;
+    color: black;
+}
+
+.CreateForm-input-field {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.CreateForm-submit-button {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid grey;
+    padding: 10px;
+    color: white;
+    background-color: #282c34;
+}
+
+.CreateForm-submit-button > span {
+    font-weight: bold;
+    font-size: smaller;
+}
