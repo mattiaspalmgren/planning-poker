@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { useHistory } from "react-router";
 
 import "./App.css";
 import CreateForm from "./CreateForm";
@@ -8,6 +9,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
   const [, setSocket] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     const ioSocket = io(SERVER_URL);
@@ -27,6 +29,7 @@ function App() {
     })
 
     const responseJson = await response.json();
+    history.push(`/${responseJson.id}`);
     console.log(responseJson);
   }
 
