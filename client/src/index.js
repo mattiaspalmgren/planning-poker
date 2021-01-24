@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import CreatePage from "./pages/CreatePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 ReactDOM.render(
@@ -9,8 +9,8 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route exact path="/">
-          <App />
-        </Route>
+          <CreatePage />
+        </Route >
       </Switch>
     </Router>
   </React.StrictMode>,

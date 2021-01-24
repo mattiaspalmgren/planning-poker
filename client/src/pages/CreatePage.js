@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useHistory } from "react-router";
 
-import "./App.css";
-import CreateForm from "./CreateForm";
+import "../pages/CreatePage.css";
+import CreateForm from "../components/CreateForm";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-function App() {
+function CreatePage() {
   const [, setSocket] = useState();
   const history = useHistory();
 
@@ -30,7 +30,6 @@ function App() {
 
     const responseJson = await response.json();
     history.push(`/${responseJson.id}`);
-    console.log(responseJson);
   }
 
   return (
@@ -45,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default CreatePage;
