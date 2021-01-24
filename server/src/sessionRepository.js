@@ -13,6 +13,10 @@ class SessionRepository {
     this.storage.set(id, sessionToCreate);
     return this.storage.get(id)
   }
+
+  async get(id) {
+    return this.storage.get(id)
+  }
 }
 
 module.exports = SessionRepository;

@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import CreatePage from "./pages/CreatePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SessionPage from "./pages/SessionPage";
+
+const uuidRegex = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/;
+const sessionPath = `/:id(${uuidRegex})?`;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,6 +14,9 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/">
           <CreatePage />
+        </Route >
+        <Route path={sessionPath}>
+          <SessionPage/>
         </Route >
       </Switch>
     </Router>

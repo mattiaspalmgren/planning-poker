@@ -22,6 +22,12 @@ app.post("/api/sessions", async (request, response) => {
   response.json(session);
 });
 
+app.get("/api/sessions/:id", async (request, response) => {
+  const sessionId = request.params.id;
+  const session = await sessionRepository.get(sessionId);
+  response.json(session);
+});
+
 const io = socket(server, {
   cors: {
     origin: process.env.CLIENT_URL,
