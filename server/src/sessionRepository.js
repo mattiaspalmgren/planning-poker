@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+const id = require("./id");
 
 class SessionRepository {
   constructor(collection) {
@@ -6,7 +6,7 @@ class SessionRepository {
   }
 
   async create(session) {
-    const sessionId = uuidv4();
+    const sessionId = id(4);
     const sessionToCreate = { sessionId, ...session };
     const { ops: insertedItems } = await this.collection.insertOne(sessionToCreate);
     const [ insertedItem ] = insertedItems;

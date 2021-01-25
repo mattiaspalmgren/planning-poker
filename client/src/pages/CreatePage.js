@@ -29,7 +29,7 @@ function CreatePage() {
     })
 
     const responseJson = await response.json();
-    history.push(`/${responseJson.id}`);
+    history.push(`/${responseJson.sessionId}`);
   }
 
   return (

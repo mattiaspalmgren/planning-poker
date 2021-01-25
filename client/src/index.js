@@ -5,7 +5,7 @@ import CreatePage from "./pages/CreatePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SessionPage from "./pages/SessionPage";
 
-const uuidRegex = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/;
+const uuidRegex = /\w4/;
 const sessionPath = `/:id(${uuidRegex})?`;
 
 ReactDOM.render(
