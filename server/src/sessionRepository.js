@@ -1,24 +1,21 @@
 const { v4: uuidv4 } = require("uuid");
-const dbConnection = require("./db");
 
-class Repository {
+class SessionRepository {
   constructor(collection) {
     this.collection = collection;
   }
 
   async create(session) {
-    this.db = await dbConnection();
-    const id = uuidv4();
-    const sessionToCreate = { id, ...session };
-    const { ops: inserted } = await this.db
-      .insertOne(sessionToCreate);
-
-    return inserted;
+    const sessionId = uuidv4();
+    const sessionToCreate = { sessionId, ...session };
+    const { ops: insertedItems } = await this.collection.insertOne(sessionToCreate);
+    const [ insertedItem ] = insertedItems;
+    return insertedItem;
   }
 
   async get(id) {
-    return this.storage.get(id);
+    return await this.collection.findOne({ sessionId: id });
   }
 }
 
-module.exports = Repository;
+module.exports = SessionRepository;

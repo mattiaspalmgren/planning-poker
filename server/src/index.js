@@ -1,40 +1,23 @@
-const express = require("express");
-const socket = require("socket.io");
-const cors = require("cors");
+const getExpress = require("./express");
+const getConnection = require("./db");
+const routes = require("./sessionRoutes");
 const SessionRepository = require("./sessionRepository");
 
-const app = express();
-app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-  })
-);
+const initLog = () => console.log(`Listening at: ${process.env.SERVER_PORT}`);
 
-const sessionRepository = new SessionRepository();
+async function init() {
+  const app = getExpress();
+  const db = await getConnection();
+  const sessionCollection = db.collection('sessions');
+  const sessionRepository = new SessionRepository(sessionCollection);
 
-const server = app.listen(process.env.SERVER_PORT, () => {
-  console.log(`Example app listening at http://localhost:${process.env.SERVER_PORT}`);
-});
+  routes(app, sessionRepository).listen(process.env.SERVER_PORT, initLog);
+}
 
-app.post("/api/sessions", async (request, response) => {
-  const session = await sessionRepository.create(request.body);
-  response.json(session);
-});
-
-app.get("/api/sessions/:id", async (request, response) => {
-  const sessionId = request.params.id;
-  const session = await sessionRepository.get(sessionId);
-  response.json(session);
-});
-
-const io = socket(server, {
-  cors: {
-    origin: process.env.CLIENT_URL,
-    methods: ["GET", "POST"],
-  },
-});
-
-io.on("connection", () => {
-  console.log("Made socket connection");
-});
+(async () => {
+  try {
+    await init();
+  } catch (error) {
+    console.log("Starting app failed: ", { error })
+  }
+})();
