@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import { useLocation } from "react-router";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const GET_SESSION_URL = `${SERVER_URL}/api/sessions`;
 
 const SessionPage = () => {
+  const [, setSocket] = useState();
   const [session, setSession] = useState();
   const { pathname } = useLocation();
 
@@ -19,8 +21,10 @@ const SessionPage = () => {
     fetchSession();
   }, [pathname]);
 
-  console.log(pathname);
-  console.log(session);
+  useEffect(() => {
+    const ioSocket = io(SERVER_URL);
+    setSocket(ioSocket);
+  }, [session]);
 
   return <div>SessionPage</div>;
 };

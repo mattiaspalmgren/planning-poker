@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import { useHistory } from "react-router";
 
 import "../pages/CreatePage.css";
@@ -8,13 +6,8 @@ import CreateForm from "../components/CreateForm";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 function CreatePage() {
-  const [, setSocket] = useState();
   const history = useHistory();
 
-  useEffect(() => {
-    const ioSocket = io(SERVER_URL);
-    setSocket(ioSocket);
-  }, []);
 
   const createSession = async (name) => {
     const data = { name };
