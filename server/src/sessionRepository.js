@@ -1,22 +1,24 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
+const dbConnection = require("./db");
 
-class SessionRepository {
-  storage;
-
-  constructor() {
-    this.storage = new Map();
+class Repository {
+  constructor(collection) {
+    this.collection = collection;
   }
 
   async create(session) {
+    this.db = await dbConnection();
     const id = uuidv4();
     const sessionToCreate = { id, ...session };
-    this.storage.set(id, sessionToCreate);
-    return this.storage.get(id)
+    const { ops: inserted } = await this.db
+      .insertOne(sessionToCreate);
+
+    return inserted;
   }
 
   async get(id) {
-    return this.storage.get(id)
+    return this.storage.get(id);
   }
 }
 
-module.exports = SessionRepository;
+module.exports = Repository;
