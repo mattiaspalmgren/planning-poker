@@ -4,12 +4,6 @@ function sessionRoutes(app, repository) {
     response.json(session);
   });
 
-  app.get("/api/sessions/:id", async (request, response) => {
-    const id = request.params.id;
-    const session = await repository.get(id);
-    response.json(session);
-  });
-
   return app;
 }
 
