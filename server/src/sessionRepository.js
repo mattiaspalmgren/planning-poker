@@ -7,10 +7,25 @@ class SessionRepository {
 
   async create(session) {
     const sessionId = id(4);
-    const sessionToCreate = { sessionId, ...session };
-    const { ops: insertedItems } = await this.collection.insertOne(sessionToCreate);
-    const [ insertedItem ] = insertedItems;
+    const sessionToCreate = { sessionId, name: session.name, votes: [] };
+    const { ops: insertedItems } = await this.collection.insertOne(
+      sessionToCreate
+    );
+    const [insertedItem] = insertedItems;
     return insertedItem;
+  }
+
+  async update(sessionId, vote) {
+    const session = await this.get(sessionId);
+    const votes = [vote, ...session.votes];
+
+    const { value: updatedSession } = await this.collection.findOneAndUpdate(
+      { sessionId },
+      { $set: { votes: votes } },
+      { returnOriginal: false }
+    );
+
+    return updatedSession
   }
 
   async get(id) {
