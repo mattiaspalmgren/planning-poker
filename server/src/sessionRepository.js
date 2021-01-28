@@ -15,13 +15,14 @@ class SessionRepository {
     return insertedItem;
   }
 
-  async update(sessionId, vote) {
+  async update(sessionId, newVote) {
     const session = await this.get(sessionId);
-    const votes = [vote, ...session.votes];
+    const filteredVotes = session.votes.filter(vote => vote.clientId !== newVote.clientId);
+    const votes = [newVote, ...filteredVotes];
 
     const { value: updatedSession } = await this.collection.findOneAndUpdate(
       { sessionId },
-      { $set: { votes: votes } },
+      { $set: { votes } },
       { returnOriginal: false }
     );
 

@@ -20,15 +20,24 @@ const SessionPage = () => {
     socket?.on('votes-update', (votes) => setVotes(votes));
   }, [socket])
 
-  return (<div>
-    <h1>SessionPage</h1>
-    {POINTS.map(size => (
-      <button key={size} onClick={() => socket.emit("vote", size)}>{size}</button>
-    ))}
-    {votes.map(vote => (
-      <span key={vote}>{vote}</span>
-    ))}
-  </div>)
-}
+  const onClick = (size) => {
+    const vote = { clientId: socket.id, value: size };
+    socket.emit("vote", vote);
+  };
+
+  return (
+    <div>
+      <h1>SessionPage</h1>
+      {POINTS.map((size) => (
+        <button key={size} onClick={() => onClick(size)}>
+          {size}
+        </button>
+      ))}
+      {votes.map((vote) => (
+        <span key={vote.clientId}>{vote.value}</span>
+      ))}
+    </div>
+  );
+};
 
 export default SessionPage;
