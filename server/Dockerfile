@@ -1,0 +1,8 @@
+FROM node:14
+
+WORKDIR /planning-poker-server
+COPY package.json /planning-poker-server
+RUN npm install
+COPY . /planning-poker-server
+
+CMD ["npm", "run", "start"]
