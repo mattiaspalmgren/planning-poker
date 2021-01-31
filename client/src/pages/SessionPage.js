@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { io } from "socket.io-client";
 import VoteButton from "../components/VoteButton";
+import Chart from "../components/Chart";
 import "./SessionPage.css";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-const POINTS = [0.5, 1, 2, 4, 8];
+const POINTS = [0.5, 1, 2, 4, 8, 12];
 
 const SessionPage = () => {
   const [socket, setSocket] = useState();
@@ -29,13 +30,14 @@ const SessionPage = () => {
     socket.emit("vote", vote);
   };
 
+  const chartData = POINTS.map(
+    (point) =>
+      votes.map((vote) => vote.value).filter((value) => value === point).length
+  );
+
   return (
     <>
-      <div>
-        {votes.map((vote) => (
-          <span key={vote.clientId}>{vote.value}</span>
-        ))}
-      </div>
+      <Chart data={{ labels: POINTS, votes: chartData }} />
       <span className={"SessionPage-vote-heading"}>Your vote</span>
       <div className={"SessionPage-vote-buttons"}>
         {POINTS.map((point) => (
