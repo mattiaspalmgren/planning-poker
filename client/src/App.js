@@ -8,7 +8,9 @@ const App = ({ children }) => {
         <h4>Planning Poker</h4>
       </header>
       <div className={"App-wrapper"}>
-        {children}
+        <div className={"App-content"}>
+          {children}
+        </div>
       </div>
     </div>
   );
