@@ -5,7 +5,7 @@ const App = ({ children }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h4>Planning Poker</h4>
+        <h1>/ Planning Poker /</h1>
       </header>
       <div className={"App-wrapper"}>
         <div className={"App-content"}>
