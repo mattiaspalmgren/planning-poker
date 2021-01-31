@@ -1,0 +1,26 @@
+.VoteButton {
+    padding: 20px;
+    min-width: 60px;
+    font-size: medium;
+    background-color: lightgrey;
+    border: 1px solid darkgray;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.VoteButton:hover {
+    background-color: darkgray;
+}
+
+.VoteButton--active {
+    border: 1px solid black;
+    background-color: #282c34;
+    color: white;
+}
+
+.VoteButton--active:hover {
+    background-color: #282c34;
+}

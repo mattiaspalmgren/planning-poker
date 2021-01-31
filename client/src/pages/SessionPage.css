@@ -1,0 +1,14 @@
+.SessionPage-vote-heading {
+    width: 100%;
+    display: block;
+    margin: 15px 0;
+    text-align: left;
+    text-transform: uppercase;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+.SessionPage-vote-buttons {
+    display: flex;
+    justify-content: space-between;
+}
