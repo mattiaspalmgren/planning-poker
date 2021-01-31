@@ -1,3 +1,20 @@
+.SessionPage-heading {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: medium;
+    font-weight: 400;
+}
+
+.SessionPage-heading span {
+    margin-left: 10px;
+    font-size: large;
+    font-weight: 800;
+}
+
+.SessionPage-spacing {
+    margin-bottom: 40px;
+}
+
 .SessionPage-vote-heading {
     width: 100%;
     display: block;

@@ -11,17 +11,17 @@ function sessionRoutes(app, repository, io) {
 const setupVoteHandling = (repository, io, id) => {
   const namespaces = io.of(id);
 
-  namespaces.on('connection', async (socket) => {
+  namespaces.on("connection", async (socket) => {
     const namespace = socket.nsp;
     const session = await repository.get(id);
 
-    namespace.emit("votes-update", session.votes);
+    namespace.emit("session-update", session);
 
     socket.on("vote", async (vote) => {
       const session = await repository.update(id, vote);
       namespace.emit("votes-update", session.votes);
     });
   });
-}
+};
 
 module.exports = sessionRoutes;
