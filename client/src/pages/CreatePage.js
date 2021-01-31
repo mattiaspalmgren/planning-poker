@@ -8,33 +8,23 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 function CreatePage() {
   const history = useHistory();
 
-
   const createSession = async (name) => {
     const data = { name };
-    const CREATE_SESSION_URL = `${SERVER_URL}/api/sessions`
+    const CREATE_SESSION_URL = `${SERVER_URL}/api/sessions`;
 
     const response = await fetch(CREATE_SESSION_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
-    })
+      body: JSON.stringify(data),
+    });
 
     const responseJson = await response.json();
     history.push(`/${responseJson.sessionId}`);
-  }
+  };
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h4>Planning Poker</h4>
-      </header>
-      <div className={"App-wrapper"}>
-        <CreateForm createSession={createSession} />
-      </div>
-    </div>
-  );
+  return <CreateForm createSession={createSession} />;
 }
 
 export default CreatePage;
