@@ -8,9 +8,9 @@ import "./SessionPage.css";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const POINTS = [0.5, 1, 2, 4, 8, 12];
 const defaultSession = {
-  name: '',
-  votes: []
-}
+  name: "",
+  votes: [],
+};
 
 const SessionPage = () => {
   const [socket, setSocket] = useState();
@@ -47,8 +47,12 @@ const SessionPage = () => {
 
   return (
     <>
-      <h2 className={"SessionPage-heading"}>name: <span>{session.name}</span></h2>
-      <h2 className={"SessionPage-heading SessionPage-spacing"}>id: <span>{session.sessionId}</span></h2>
+      <h2 className={"SessionPage-heading"}>
+        name: <span>{session.name}</span>
+      </h2>
+      <h2 className={"SessionPage-heading SessionPage-spacing"}>
+        id: <span>{session.sessionId}</span>
+      </h2>
       <Chart data={{ labels: POINTS, votes: chartData }} />
       <span className={"SessionPage-vote-heading"}>Your vote</span>
       <div className={"SessionPage-vote-buttons"}>
@@ -63,6 +67,6 @@ const SessionPage = () => {
       </div>
     </>
   );
-}
+};
 
 export default SessionPage;

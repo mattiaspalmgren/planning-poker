@@ -8,12 +8,10 @@ const App = ({ children }) => {
         <h1>/ Planning Poker /</h1>
       </header>
       <div className={"App-wrapper"}>
-        <div className={"App-content"}>
-          {children}
-        </div>
+        <div className={"App-content"}>{children}</div>
       </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -6,11 +6,11 @@ const CreateForm = ({ createSession }) => {
 
   const handleSubmit = () => {
     createSession(sessionName);
-  }
+  };
 
   const handleInputChange = (e) => {
     setSessionName(e.target.value);
-  }
+  };
 
   return (
     <div className={"CreateForm-wrapper"}>

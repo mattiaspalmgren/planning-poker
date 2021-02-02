@@ -36,7 +36,7 @@ const options = {
         ticks: {
           beginAtZero: true,
           stepSize: 1,
-          max: 5
+          max: 5,
         },
       },
     ],
