@@ -45,13 +45,15 @@ const SessionPage = () => {
       votes.map((vote) => vote.value).filter((value) => value === point).length
   );
 
+  const [, , host] = process.env.REACT_APP_HOST_URL.split("/");
+  const link = `${host}/${session.sessionId}`;
   return (
     <>
       <h2 className={"SessionPage-heading"}>
         name: <span>{session.name}</span>
       </h2>
       <h2 className={"SessionPage-heading SessionPage-spacing"}>
-        id: <span>{session.sessionId}</span>
+        link: <span>{link}</span>
       </h2>
       <Chart data={{ labels: POINTS, votes: chartData }} />
       <span className={"SessionPage-vote-heading"}>Your vote</span>
